@@ -7,6 +7,9 @@
     * [With spaces](#with-spaces)
 * [Variables in figure](#variables-in-figure)
 * [Letters](#letters)
+* [Special figures](#special-figures)
+    * [Piramide](#piramide)
+    * [Piramide with median](#piramide-with-median)
 
 ## Figure
 
@@ -302,7 +305,7 @@ for (int row = 0; row < trougao_size; row++)
 Everything is very easy here. We do everything exactly the same as with variables, but instead of a `number` there will be an `index` that will refer to an array with letters.
 
 ```c
-const char letters[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+const char letters[] = {'A', 'B', 'C', 'D', 'E', 'F'}
 // variable for index
 int index = 0;
 
@@ -322,4 +325,182 @@ B B
 C C C
 D D D D
 E E E E E
+```
+
+## Special figures
+
+### Piramide
+
+#### Simple piramide
+
+There are special figures for group 3. In fact, everything is the same, you just need to use the spaces correctly.
+
+For example:
+<table>
+    <tr>
+        <th></th>
+        <th>Piramide</th>
+        <th>Right triangle</th>
+    <tr>
+    <tr>
+        <td>View</td>
+        <td>
+            <pre>
+  * 
+ * * 
+* * *</pre>
+        </td>
+        <td>
+<pre>
+    * 
+  * * 
+* * *
+</pre>
+        </td>
+    </tr>
+    <tr>
+        <td>Spaces</td>
+        <td>1</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>Symbols</td>
+        <td>2</td>
+        <td>2</td>
+    </tr>
+</table>
+
+Thus, in order for us to create a pyramid, we need to write the same code as [above](#with-spaces), but instead of 2 spaces per 2 characters, **make 1 space per 2 characters**
+
+```
+* * * * * 
+ * * * * 
+  * * * 
+   * * 
+    * 
+```
+```c
+// Same code
+const int trougao_size = 5;
+for (int row = 0; row < trougao_size; row++)
+{
+    for (int space = 0; space < row; space++)
+    {
+        // one space instead of two
+        printf(" ");
+    }
+
+    // Same
+    for (int col = 0; col < trougao_size - row; col++)
+    {
+        // 2 symbols
+        printf("* ");
+    }
+    printf("\n");
+}
+```
+
+#### Piramide with median
+
+A pyramid with a center is built completely differently.
+
+```
+    *
+   1*2
+  11*22
+ 111*222
+1111*2222
+
+ * - center
+```
+Inside one loop we have 3 loops:
+* loop for spaces (like [above](#with-spaces))
+* loop for left side trougao (1)
+* loop for right side trougao (2)
+
+```c
+int trougao_size = 5;
+
+for(int row = 0; row  < trougao_size; row++) {
+    // Spaces
+    for(int space = trougao_size - row - 1; space > 0; space--) {
+        printf(" ");
+    }
+    // Left side, same as 1 example for figure, but place -1
+    for(int col = 0; col <= row - 1; col++) {
+        printf("1");
+    }
+    // Center
+    printf("*");
+    // Right side, same as 1 example for figure, but place -1
+    for(int col = 0; col <= row - 1; col++) {
+        printf("2");
+    }
+    printf("\n");
+}
+```
+> The loop for the left and right sides is identical
+
+> The number of characters must be equal to the number of spaces in `printf`
+
+> The left and right side same as [above](#simple-type-without-spaces),  but for columns we constantly subtract -1 to center
+
+**Examples:**
+```
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+```
+```c
+int trougao_size = 5;
+
+for(int row = 0; row  < trougao_size; row++) {
+    // Spaces like figure 3 with spaces
+    for(int space = 0; space < trougao_size - 1 - row; space++) {
+        printf(" ");
+    }
+    // Left sire
+    for(int col = 0; col <= row - 1; col++) {
+        printf("*");
+    }
+    // Center
+    printf("*");
+    // Right side
+    for(int col = 0; col <= row - 1; col++) {
+        printf("*");
+    }
+    printf("\n");
+}
+// New trougao with 4 size
+trougao_size--;
+
+for(int row = 0; row  < trougao_size; row++) {
+    // Space to move the piece a little to the right
+    printf(" ");
+    
+    // Spaces like figure 4 with spaces
+    for(int space = 0; space < row; space++)
+    {
+        printf(" ");
+    }
+    // Left side like figure 4, but -1
+    for(int col = 0; col < trougao_size - row - 1; col++) {
+        printf("*");
+    }
+    // Center
+    printf("*");
+
+    // Right side like figure 4, but -1
+    for(int col = 0; col < trougao_size - row - 1; col++) {
+        printf("*");
+    }
+    printf("\n");
+}
+return 0;
 ```
