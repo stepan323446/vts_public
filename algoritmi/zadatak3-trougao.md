@@ -302,7 +302,7 @@ for (int row = 0; row < trougao_size; row++)
 Everything is very easy here. We do everything exactly the same as with variables, but instead of a `number` there will be an `index` that will refer to an array with letters.
 
 ```c
-const char letters[] = {'A', 'B', 'C', 'D', 'E', 'F'}
+const char letters[] = {'A', 'B', 'C', 'D', 'E', 'F'};
 // variable for index
 int index = 0;
 
