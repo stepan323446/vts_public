@@ -1,4 +1,5 @@
 # How to write correctly trougao
+[Nazad](./kolokvijum_2.md)
 
 ## Table of contents
 
@@ -6,11 +7,11 @@
     * [Without spaces](#simple-type-without-spaces)
     * [With spaces](#with-spaces)
 * [Variables in figure](#variables-in-figure)
-* [Letters](#letters)
+    * [Letters](#letters)
 * [Special figures](#special-figures)
     * [Piramide](#piramide)
     * [Piramide with median](#piramide-with-median)
-
+    
 ## Figure
 
 We have 4 types of figure.
