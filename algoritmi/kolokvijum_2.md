@@ -3,10 +3,15 @@
 Kolokvijum može da sadrži zadatke na:
 
 * [Crtanje trougao](./zadatak3-trougao.md)
-* Fajlovi
+* Fajlovi (u `samostalni_zadatak/file_zadatak.c`)
 * [Random](#random)
+* [Formule matematike](#formule-matematike)
+    * [Factorial](#factorial)
+    * [Prost broj](#proste-prime-brojeva)
+    * [Mediana niza](#mediana-niza)
+    * [Funkciji iz math.h](#mathh)
+* [Factorial](#factorial)
 * [Sortiranje](#sortiranje)
-* Struct (soon)
 
 ## Random
 
@@ -37,6 +42,84 @@ int randRange(int min, int max) {
     return rand() % (max - min + 1) + min;
 }
 ```
+
+## Formule matematike
+
+### Factorial
+
+**Faktorial** je nenegativnog cijelog broja `𝑛` je proizvod svih pozitivnih brojeva manjih ili jednakih 
+`𝑛`
+
+*Naprimer: 5! = 1 * 2 * 3 * 4 * 5*
+
+**Primer koda:**
+```c
+int factorial(int n) {
+    // U početku uvek 1 * ...
+    int res = 1;
+
+    // Factorial: 1 * 1 * 2 * 3 * 4 * ... * n 
+    for(int i = 1; i <= n; i++) {
+        res *= i;
+    }
+    return res;
+}
+```
+**PAZNO:** Faktorial 0 je 1 (0! = 1)
+
+### Proste (Prime) brojeva
+
+**Prost broj** je prirodan broj veći od 1, deljiv samo brojem 1 i samim sobom.
+
+**Primer koda:**
+```c
+int isPrime(int num) {
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+```
+
+### Mediana niza
+
+**Medijan niza** je srednji element sortiranog niza u slučaju neparnog broja elemenata u nizu i prosek dva srednja elementa kada je broj elemenata u nizu paran.
+
+![median](https://www.scaler.com/topics/images/median-of-array-thumbnail.webp)
+
+**Primer koda:**
+> Za sortiranje mozemo koristiti [koj zelimo metod](#sortiranje)
+
+```c
+double medianArray(int arr[], int n) {
+    // Ja koristim bubble sort
+    bubbleSort(arr, n, 1);
+
+    // Ako parni broj (2, 4, 6, 8)
+    if(n % 2 == 0) {
+        return (double)(arr[n / 2] + arr[n / 2 - 1]) / 2.0; // (4 + 6) / 2.0 = 5
+    }
+    // Ako neparni (2, 4, 6, 8, 10)
+    else {
+        return (double)arr[n/2]; // 6
+    }
+}
+```
+
+### math.h
+
+Mi smo koristili:
+
+* `pow(broj, stepen)` - Broj u stepenu
+* `fabs(broj)` - moduo (ili apsolutna vrednost) (`|-5| = 5`)
+> `fabs` je potreban u funkciji `minDiff()` za `samostalni_zadatak/file_zadatak.c`
+* `log(broj)` - logarifm broja
+* `M_E` - broj *e* (`2,7182818284`)
+* `M_PI` - broj *pi* (`3,1415926535`)
+
+> Svaka funkcija vrati značaj u `double`
 
 ## Sortiranje
 
